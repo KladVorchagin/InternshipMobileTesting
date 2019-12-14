@@ -44,7 +44,7 @@ public class BaseTest {
         */
         capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Device");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/vkorchagin/Downloads/InternshipMobileTesting/ApiDemos.apk");
+        capabilities.setCapability(MobileCapabilityType.APP, ""); //todo set APK path
         capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
 
@@ -64,7 +64,7 @@ public class BaseTest {
     These functions should be used to clean up any changes done on the device before the next test suite run.
     */
     @AfterSuite
-    public void uninstallApp() {
+    public void quit() {
         if (Objects.nonNull(driver)) {
             driver.quit();
         }
@@ -82,75 +82,27 @@ public class BaseTest {
 
     @Test(enabled = true)
     public void gesturesLongTapTest() {
-        MobileElement viewsTextView = driver.findElement(MobileBy.xpath("//android.widget.TextView[@text='Views']"));
-        viewsTextView.click();
-
-        TouchAction touchAction = new TouchAction(driver);
-        MobileElement expListsTextView = driver.findElement(MobileBy.xpath("//android.widget.TextView[@text='Expandable Lists']"));
-        touchAction.tap(tapOptions().withElement(element(expListsTextView))).perform();
-
-        MobileElement customAdapterTextView = driver.findElement(MobileBy.xpath("//android.widget.TextView[@text='1. Custom Adapter']"));
-        customAdapterTextView.click();
-
-        MobileElement pn = driver.findElement(MobileBy.xpath("//android.widget.TextView[@text='People Names']"));
-        touchAction.longPress(LongPressOptions.longPressOptions().withElement(element(pn)).withDuration(Duration.ofSeconds(2))).release().perform();
-        Assert.assertTrue(driver.findElement(MobileBy.id("android:id/title")).isDisplayed(), "Sample menu is not displayed");
+        //todo
     }
 
     @Test(enabled = true)
     public void gesturesLongTapTestv2() {
-        CustomNamesPage customNamesPage = new HomePage(driver)
-                .goToViews()
-                .gotoNames();
-        customNamesPage.getSampleMenuByLongTap();
-        Assert.assertTrue(customNamesPage.sampleMenuTitle.isDisplayed(), "Sample menu is not displayed");
+        //todo
     }
 
     @Test(enabled = true)
     public void gesturesSwipeTest() {
-        MobileElement viewsTextView = driver.findElement(MobileBy.xpath("//android.widget.TextView[@text='Views']"));
-        viewsTextView.click();
-
-        driver.findElement(MobileBy.xpath("//android.widget.TextView[@text='Date Widgets']")).click();
-        driver.findElement(MobileBy.xpath("//android.widget.TextView[@text='2. Inline']")).click();
-
-        //Elements for verification
-        MobileElement expectedHours = driver.findElement(MobileBy.id("android:id/hours"));
-        MobileElement expectedMinutes = driver.findElement(MobileBy.id("android:id/minutes"));
-        MobileElement dateSeparator = driver.findElement(MobileBy.id("android:id/separator"));
-        //
-
-        Assert.assertEquals(String.format("%s%s%s", expectedHours.getText(), dateSeparator.getText(), expectedMinutes.getText()), "12:15", "Actual date is not correct");
-
-        driver.findElement(MobileBy.xpath("//*[@content-desc='9']")).click();
-
-        TouchAction touchAction = new TouchAction(driver);
-
-        MobileElement first = driver.findElement(MobileBy.xpath("//*[@content-desc='15']"));
-        MobileElement second = driver.findElement(MobileBy.xpath("//*[@content-desc='45']"));
-        touchAction.longPress(LongPressOptions.longPressOptions().withElement(element(first)).withDuration(Duration.ofSeconds(2))).moveTo(element(second)).release().perform();
-        Assert.assertEquals(String.format("%s%s%s", expectedHours.getText(), dateSeparator.getText(), expectedMinutes.getText()), "9:45", "Actual date is not correct");
+        //todo
     }
 
     @Test(enabled = true)
     public void gesturesScrollTest() {
-        MobileElement viewsTextView = driver.findElement(MobileBy.xpath("//android.widget.TextView[@text='Views']"));
-        viewsTextView.click();
-        driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Radio Group\"))");
-        Assert.assertTrue(driver.findElement(MobileBy.xpath("//android.widget.TextView[@text='Radio Group']")).isDisplayed(), "Sample menu is not displayed");
+        //todo
     }
 
     @Test(enabled = true)
     public void gesturesDragDropTest() {
-        MobileElement viewsTextView = driver.findElement(MobileBy.xpath("//android.widget.TextView[@text='Views']"));
-        viewsTextView.click();
-        driver.findElement(MobileBy.xpath("//android.widget.TextView[@text='Drag and Drop']")).click();
-        MobileElement source = driver.findElementsByClassName("android.view.View").get(0);
-        MobileElement destination = driver.findElementsByClassName("android.view.View").get(1);
-
-        TouchAction touchAction = new TouchAction(driver);
-        //longpress(source)/move(destination)/release
-        touchAction.longPress(LongPressOptions.longPressOptions().withElement(element(source))).moveTo(element(destination)).release().perform();
+        //todo
     }
 
     @Test(enabled = false)
